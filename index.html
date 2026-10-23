@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Washy Moshy - Aplikasi Pengelolaan Laundry Kiloan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LANDING PAGE -->
+<section id="landing">
+  <header class="nav"><div class="wrap">
+    <a class="brand" href="#">
+      <img src="logo_washy_moshy.png" alt="Washy Moshy" class="lg">
+    <span>Washy Moshy</span>
+  </a>
+    <nav><a href="#fitur">Fitur</a><a href="#alur">Alur Kerja</a></nav>
+    <a class="btn pri" href="#login">Masuk</a>
+  </div></header>
+  <div class="wrap hero">
+    <div>
+      <span class="tag">Aplikasi Pengelolaan Laundry Kiloan</span>
+      <h1>Kelola laundry kiloan lebih rapi, cepat, dan akurat</h1>
+      <p>Catat pelanggan, hitung biaya otomatis dari berat cucian, pantau status order, dan lihat rekap pendapatan dalam satu dashboard.</p>
+      <div class="row"><a class="btn pri big" href="#login">Mulai Sekarang</a><a class="btn big" href="#fitur">Lihat Fitur</a></div>
+    </div>
+    <div class="art">
+      <div class="wsh"><div class="pn"><i></i><i></i></div><div class="dr"><div class="wv"></div></div></div>
+      <div class="fl f1">Order LD-010 diterima</div>
+      <div class="fl f2">Total Rp56.000</div>
+    </div>
+  </div>
+  <div class="wrap sec" id="fitur">
+    <h2>Fitur utama</h2>
+    <div class="fg">
+      <div class="card"><span class="fi" data-i="list"></span><h3>Order &amp; total otomatis</h3><p>Total biaya dihitung dari berat dikali harga layanan per kilogram.</p></div>
+      <div class="card"><span class="fi" data-i="drop"></span><h3>Pantau status</h3><p>Diterima, Dicuci, Selesai, hingga Diambil dengan satu klik.</p></div>
+      <div class="card"><span class="fi" data-i="users"></span><h3>Pelanggan &amp; layanan</h3><p>Data master tertata, mudah dicari, dan siap dipakai saat membuat order.</p></div>
+      <div class="card"><span class="fi" data-i="chart"></span><h3>Laporan pendapatan</h3><p>Rekap order dan pendapatan per periode, bisa dicetak atau diekspor CSV.</p></div>
+    </div>
+  </div>
+  <div class="wrap sec" id="alur">
+    <h2>Alur kerja</h2>
+    <div class="fg">
+      <div class="card st"><b>1</b><h3>Catat data</h3><p>Input pelanggan dan jenis layanan.</p></div>
+      <div class="card st"><b>2</b><h3>Buat order</h3><p>Masukkan berat, sistem hitung total.</p></div>
+      <div class="card st"><b>3</b><h3>Update status</h3><p>Dicuci, Selesai, lalu Diambil.</p></div>
+      <div class="card st"><b>4</b><h3>Lihat rekap</h3><p>Pantau order dan pendapatan.</p></div>
+    </div>
+  </div>
+  <footer><div class="wrap"><span>&copy; 2026 Washy Moshy &middot; PBLIF1-PB04 &middot; Teknik Informatika, Politeknik Negeri Batam</span></div></footer>
+</section>
+
+<!-- LOGIN -->
+<section id="login" hidden>
+  <div class="lw">
+    <div class="lv">
+      <a class="brand" href="#">
+  <img
+    src="logo_washy_moshy.png"
+    alt="Logo Washy Moshy"
+    class="brand-logo"
+  >
+  <span>Washy Moshy</span>
+</a>
+      <h2>Pengelolaan laundry kiloan yang lebih tertata.</h2>
+      <p>Pantau order, status cucian, dan pendapatan dalam satu tempat.</p>
+    </div>
+    <form class="lf" id="lform" novalidate>
+      <h1>Selamat datang</h1>
+      <p class="mu">Masuk untuk mengelola laundry Anda.</p>
+      <label>Username / Email<input id="lu" autocomplete="username" placeholder="admin@washymoshy.id"></label>
+      <label>Password<div class="pw"><input id="lp" type="password" autocomplete="current-password" placeholder="Masukkan password"><button type="button" id="lt">Lihat</button></div></label>
+      <div class="er" id="le"></div>
+      <button class="btn pri full" id="lb">Masuk</button>
+      <div class="hint"><b>Akun demo:</b> admin@washymoshy.id / admin123<br>Autentikasi hanya simulasi front-end, bukan keamanan produksi.</div>
+      <a class="mu" href="#">&larr; Kembali ke beranda</a>
+    </form>
+  </div>
+</section>
+
+<!-- APLIKASI -->
+<section id="app" hidden>
+  <aside id="sb">
+    <div class="brand">
+        <img src="logo_washy_moshy.png" alt="Washy Moshy" class="sidebar-logo">
+        <span>Washy Moshy</span>
+    </div>
+</aside>
+  <div id="ov"></div>
+  <div class="main">
+    <header class="top">
+      <button class="ib bur" id="bur"></button>
+      <div class="ttl"><h2 id="tt"></h2><small id="bc"></small></div>
+      <div class="sr tsr"><span data-i="search"></span><input id="gs" placeholder="Cari order, tekan Enter"></div>
+      <div class="rel"><button class="ib" id="bell" data-i="bell"></button><div class="dd" id="nt" hidden></div></div>
+      <div class="me"><span class="av">AD</span><div><b>Admin</b><small>Petugas Laundry</small></div></div>
+    </header>
+    <main id="pg"></main>
+  </div>
+</section>
+
+<div id="md" class="md"></div>
+<div id="ts"></div>
+<script src="script.js"></script>
+</body>
+</html>
