@@ -59,3 +59,14 @@ Menghapus data demo: jalankan di phpMyAdmin `DELETE FROM payments; DELETE FROM o
 ## Status
 Selesai (ditulis): semua fitur pada daftar kebutuhan. **Belum diverifikasi dengan eksekusi**: kode ini ditulis tanpa PHP/MySQL di lingkungan pembuatnya, sehingga belum pernah dijalankan. Lakukan checklist di atas dan laporkan galat bila ada.
 Batasan: tanpa pagination (maks. 200 order di daftar), tanpa audit log, tanpa manajemen pengguna lewat web (akun dibuat via terminal).
+
+---
+## Akun Demo & Hak Akses (versi `index.html` + `script.js`)
+Buka `index.html` di browser (atau Live Server). Autentikasi hanya simulasi front-end.
+
+| Akun | Username / Password | Menu yang bisa dibuka |
+|---|---|---|
+| Owner (Pemilik) | `owner` / `owner123` | Semua menu, termasuk Laporan |
+| Admin (Petugas) | `admin` / `admin123` | Semua menu **kecuali Laporan** |
+
+Akun dan aturan akses ada di bagian `ACC` pada awal `script.js` (`deny: ['reports']` untuk admin). Menu Laporan disembunyikan untuk admin dan akses langsung `#app/reports` ditolak.

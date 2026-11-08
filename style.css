@@ -136,7 +136,8 @@ h3 {
   box-shadow: var(--sh);
   padding: 18px;
 }
-
+.btn-lunas { background:#e6f6ec; color:#1a7f45; border-color:#9bd5b0; }
+.btn-belum { background:#fdecef; color:#9b2442; border-color:#eba3b2; }
 /* ---------- Brand / Logo ---------- */
 .brand {
   display: flex;
@@ -820,7 +821,7 @@ footer {
   color: var(--mu);
 }
 
-/* ---------- Order per status (SUDAH DIPERBAIKI) ---------- */
+/* ---------- Order per status ---------- */
 .pr {
   margin-bottom: 14px;
 }
@@ -832,7 +833,7 @@ footer {
   margin-bottom: 5px;
 }
 
-/* hanya bar progres (anak langsung .pr), bukan label di dalam div */
+
 .pr > span {
   display: block;
   height: 8px;
@@ -928,7 +929,9 @@ tr:hover td {
 }
 
 .ac button {
-  width: 30px;
+  width: auto;
+  min-width: 30px;
+  padding: 0 10px;
   height: 30px;
   border: 1px solid var(--bd);
   background: #fff;

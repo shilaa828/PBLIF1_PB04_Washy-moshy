@@ -1,12 +1,19 @@
 /* Washy Moshy - front-end demo (tanpa backend). Data disimpan di LocalStorage. */
 const I={drop:'<path d="M12 2s7 7 7 12a7 7 0 01-14 0c0-5 7-12 7-12z"/>',home:'<path d="M3 12l9-9 9 9M5 10v10h14V10"/>',list:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',users:'<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/>',tag:'<path d="M20 12l-8 8-9-9V3h8z"/><circle cx="7.5" cy="7.5" r="1"/>',card:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>',chart:'<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>',cog:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',out:'<path d="M9 21H5V3h4M16 17l5-5-5-5M21 12H9"/>',plus:'<path d="M12 5v14M5 12h14"/>',edit:'<path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/>',trash:'<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>',eye:'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>',bell:'<path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0"/>',menu:'<path d="M3 6h18M3 12h18M3 18h18"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',next:'<path d="M5 12h14M13 6l6 6-6 6"/>'};
+/* Akun demo & hak akses (simulasi front-end). deny = menu yang tidak boleh dibuka. */
+const ACC={
+  owner:{u:['owner','owner@washymoshy.id'],p:'owner123',name:'Owner',role:'Pemilik (Owner)',ini:'OW',deny:[]},
+  admin:{u:['admin','admin@washymoshy.id'],p:'admin123',name:'Admin',role:'Petugas Laundry',ini:'AD',deny:['reports']}
+};
+const ME=()=>ACC[localStorage.wm_auth]||null;
+const can=p=>{const m=ME();return !!m&&!m.deny.includes(p)};
 const $=s=>document.querySelector(s),ic=n=>`<svg class="ic" viewBox="0 0 24 24">${I[n]}</svg>`;
 const rp=n=>'Rp'+Number(n).toLocaleString('id-ID'),today=()=>new Date().toISOString().slice(0,10),fmt=d=>d?d.slice(8)+'/'+d.slice(5,7)+'/'+d.slice(0,4):'-';
 const esc=s=>String(s??'').replace(/"/g,'&quot;'),ST=['Diterima','Dicuci','Selesai','Diambil'];
 
 function seed(){
-  const svc=[{id:'s1',name:'Cuci Kering',price:6000,days:2,desc:'Cuci bersih dan dikeringkan.',on:1},{id:'s2',name:'Cuci Setrika',price:8000,days:3,desc:'Cuci, kering, dan disetrika rapi.',on:1},{id:'s3',name:'Setrika Saja',price:5000,days:2,desc:'Khusus setrika pakaian bersih.',on:1},{id:'s4',name:'Cuci Selimut, Seprei, dan Bedcover',price:15000,days:1,desc:'Bersih, wangi dan bebas tungau.',on:1}];
-  const cust=[['c1','Rina Wulandari','0812-3456-7801','Batam Center'],['c2','Budi Santoso','0821-9876-5432','Mukakuning'],['c3','Siti Aminah','0857-1234-5678','Sei Panas'],['c4','Dedi Kurniawan','0813-7711-8888','Tiban'],['c5','Maya Putri','0877-2211-3344','Nagoya'],['c6','Andi Pratama','0896-5543-2100','Bengkong']].map(([id,name,phone,addr])=>({id,name,phone,addr}));
+  const svc=[{id:'s1',name:'Cuci Kering',price:6000,days:2,desc:'Cuci bersih dan dikeringkan.',on:1},{id:'s2',name:'Cuci Setrika',price:8000,days:3,desc:'Cuci, kering, dan disetrika rapi.',on:1},{id:'s3',name:'Setrika Saja',price:5000,days:2,desc:'Khusus setrika pakaian bersih.',on:1},{id:'s4',name:'Cuci Selimut, Seprei, dan Bedcover',price:15000,days:1,desc:'Bersih, wangi dan bebas tungau.',on:1},{id:'s4',name:'Cuci Kering Lipat',price:7000,days:2,desc:'Cuci Kering Ekstra Lipat',on:1}];
+  const cust=[['c1','Rina Wulandari','0812-3456-7801','Batam Center'],['c2','Budi Santoso','0821-9876-5432','Mukakuning'],['c3','Siti Aminah','0857-1234-5678','Sei Panas'],['c4','Dedi Kurniawan','0813-7711-8888','Tiban'],['c5','Maya Putri','0877-2211-3344','Nagoya'],['c6','Andi Pratama','0896-5543-2100','Bengkong'],['c7','Abyaqsa Ramadan','0811-2233-4567','Batam Center'],['c8','Ashila Fayyaza','0812-5433-9876','Nongsa'],['c9','Faizzah Jamal','0817-0817-0817','Piayu'],['c10','Jenal Rahmadani','0823-0922-0906','Batam Center']].map(([id,name,phone,addr])=>({id,name,phone,addr}));
   const raw=[['c1','2026-10-14','s2',4,'Diambil',1],['c2','2026-10-15','s1',3,'Diambil',1],['c3','2026-10-16','s4',2.5,'Diambil',1],['c4','2026-10-17','s2',5,'Selesai',0],['c5','2026-10-18','s1',6,'Selesai',1],['c6','2026-10-18','s3',3,'Dicuci',0],['c1','2026-10-19','s2',3.5,'Dicuci',0],['c2','2026-10-19','s4',2,'Dicuci',1],['c3','2026-10-20','s1',4,'Diterima',0],['c5','2026-10-20','s2',7,'Diterima',0]];
   const ord=raw.map(([cu,date,s,kg,status,paid],i)=>{const price=svc.find(x=>x.id==s).price;return{id:'o'+i,code:'LD-'+String(i+1).padStart(3,'0'),cust:cu,date,svc:s,kg,price,total:kg*price,status,paid,pdate:paid?date:'',note:''}});
   return{svc,cust,ord,cfg:{name:'Washy Moshy Laundry',phone:'0812-0000-1234',addr:'Batam Center, Batam'}};
@@ -76,7 +83,7 @@ function ordForm(id){
 function ordView(id){const o=DB.ord.find(x=>x.id==id);modal('Detail Order '+o.code,dl([['Pelanggan',cn(o.cust)],['Tanggal masuk',fmt(o.date)],['Layanan',sv(o.svc)],['Berat',o.kg+' kg'],['Harga per kg',rp(o.price)],['Total biaya',`<b>${rp(o.total)}</b>`],['Status',badge(o.status)],['Pembayaran',pay(o)],['Catatan',o.note||'-']]))}
 function ordDel(id){ask('Hapus order ini? Tindakan tidak dapat dibatalkan.',()=>{DB.ord=DB.ord.filter(o=>o.id!=id);save();toast('Order dihapus');render()})}
 function adv(id){const o=DB.ord.find(x=>x.id==id);o.status=ST[ST.indexOf(o.status)+1];save();toast(`${o.code} kini berstatus ${o.status}`);render()}
-const oact=o=>`<div class="ac">${o.status!='Diambil'?`<button title="Lanjutkan status" onclick="adv('${o.id}')">${ic('next')}</button>`:''}<button onclick="ordView('${o.id}')">${ic('eye')}</button><button onclick="ordForm('${o.id}')">${ic('edit')}</button><button class="dl" onclick="ordDel('${o.id}')">${ic('trash')}</button></div>`;
+const oact=o=>`<div class="ac">${o.status!='Diambil'?`<button title="Lanjutkan status" onclick="adv('${o.id}')">Status Selanjutnya</button>`:''}<button onclick="ordView('${o.id}')">${ic('eye')}</button><button onclick="ordForm('${o.id}')">${ic('edit')}</button><button class="dl" onclick="ordDel('${o.id}')">${ic('trash')}</button></div>`;
 function drawO(){const q=F.q.toLowerCase();
   const l=sorted(DB.ord).filter(o=>(o.code+cn(o.cust)).toLowerCase().includes(q)&&(!F.st||o.status==F.st)&&(!F.from||o.date>=F.from)&&(!F.to||o.date<=F.to));
   $('#tb').innerHTML=tbl(['Kode','Pelanggan','Tanggal','Layanan','Berat','Total','Status','Aksi'],l.map(o=>[`<b>${o.code}</b>`,cn(o.cust),fmt(o.date),sv(o.svc),o.kg+' kg',rp(o.total),badge(o.status),oact(o)]))}
@@ -85,7 +92,7 @@ function drawO(){const q=F.q.toLowerCase();
 let PF='';
 function togglePay(id){const o=DB.ord.find(x=>x.id==id);o.paid=o.paid?0:1;o.pdate=o.paid?today():'';save();toast(o.paid?`${o.code} ditandai lunas`:`${o.code} ditandai belum lunas`);render()}
 function drawP(){const l=sorted(DB.ord).filter(o=>!PF||(PF=='1')==!!o.paid);
-  $('#tb').innerHTML=tbl(['Kode','Pelanggan','Total','Pembayaran','Tgl bayar','Aksi'],l.map(o=>[`<b>${o.code}</b>`,cn(o.cust),rp(o.total),pay(o),fmt(o.pdate),`<button class="btn" onclick="togglePay('${o.id}')">${o.paid?'Tandai belum lunas':'Tandai lunas'}</button>`]))}
+  $('#tb').innerHTML=tbl(['Kode','Pelanggan','Total','Pembayaran','Tgl bayar','Aksi'],l.map(o=>[`<b>${o.code}</b>`,cn(o.cust),rp(o.total),pay(o),fmt(o.pdate),`<button class=\"btn ${o.paid ? 'btn-belum' : 'btn-lunas'}\" onclick=\"togglePay('${o.id}')\">${o.paid?'Tandai belum lunas':'Tandai lunas'}</button>`]))}
 
 /* ---------- Laporan ---------- */
 let R={from:'2026-10-01',to:'2026-10-31',st:''};
@@ -112,7 +119,7 @@ customers:['Pelanggan',()=>head('Pelanggan',`${DB.cust.length} pelanggan terdaft
 services:['Layanan',()=>head('Layanan','Jenis layanan, harga per kg, dan estimasi pengerjaan (data contoh).',addB('Tambah Layanan','svcForm()'))+`<div class="sg">${DB.svc.map(s=>`<div class="card"><div class="ft" style="margin:0"><h3>${s.name}</h3><span class="b ${s.on?'Lunas':'Diambil'}">${s.on?'Aktif':'Nonaktif'}</span></div><p>${s.desc||''}</p><div class="pz">${rp(s.price)}<small class="mu" style="font-size:12px;font-weight:500"> /kg</small></div><div class="ft"><span class="mu">Estimasi ${s.days} hari</span><div class="ac"><button onclick="svcForm('${s.id}')">${ic('edit')}</button><button class="dl" onclick="svcDel('${s.id}')">${ic('trash')}</button></div></div></div>`).join('')}</div>`],
 payments:['Pembayaran',()=>{const p=DB.ord.filter(o=>o.paid);return head('Pembayaran',`Lunas ${p.length} order (${rp(sum(p))}) &middot; Belum lunas ${DB.ord.length-p.length} order (${rp(sum(DB.ord)-sum(p))}). Status pembayaran terpisah dari status pengerjaan.`)+`<div class="card"><div class="bar"><select id="pf"><option value="">Semua</option><option value="1" ${PF=='1'?'selected':''}>Lunas</option><option value="0" ${PF=='0'?'selected':''}>Belum lunas</option></select></div><div id="tb"></div></div>`}],
 reports:['Laporan',()=>head('Laporan','Rekap order dan pendapatan dari data aplikasi.',`<button class="btn" onclick="print()">Cetak</button><button class="btn pri" onclick="csv()">Ekspor CSV</button>`)+`<div class="card no-print" style="margin-bottom:16px"><div class="bar" style="margin:0"><label style="margin:0">Dari<input type="date" id="rf" value="${R.from}"></label><label style="margin:0">Sampai<input type="date" id="rt" value="${R.to}"></label><label style="margin:0">Status<select id="rs"><option value="">Semua status</option>${ST.map(s=>`<option ${R.st==s?'selected':''}>${s}</option>`).join('')}</select></label></div></div><div id="rb"></div>`],
-settings:['Pengaturan',()=>head('Pengaturan','Informasi usaha dan profil pengguna demo.')+`<div class="g"><form class="card" id="cf">${fld('name','Nama laundry','text',DB.cfg.name,0,'required')}${fld('phone','Kontak (telepon)','tel',DB.cfg.phone)}${fld('addr','Alamat','area',DB.cfg.addr)}<button class="btn pri">Simpan Pengaturan</button></form><div class="card"><h3>Profil demo</h3>${dl([['Nama','Admin'],['Peran','Petugas Laundry'],['Email','admin@washymoshy.id']])}<hr style="border:0;border-top:1px solid var(--bd);margin:16px 0"><p class="mu" style="margin-bottom:10px">Kembalikan seluruh data ke kondisi awal demo.</p><button class="btn dg" onclick="ask('Reset semua data demo ke kondisi awal?',()=>{DB=seed();save();toast('Data demo direset');render()})">Reset Data Demo</button></div></div>`]
+settings:['Pengaturan',()=>head('Pengaturan','Informasi usaha dan profil pengguna demo.')+`<div class="g"><form class="card" id="cf">${fld('name','Nama laundry','text',DB.cfg.name,0,'required')}${fld('phone','Kontak (telepon)','tel',DB.cfg.phone)}${fld('addr','Alamat','area',DB.cfg.addr)}<button class="btn pri">Simpan Pengaturan</button></form><div class="card"><h3>Profil demo</h3>${dl([['Nama',ME().name],['Peran',ME().role],['Email',ME().u[1]]])}<hr style="border:0;border-top:1px solid var(--bd);margin:16px 0"><p class="mu" style="margin-bottom:10px">Kembalikan seluruh data ke kondisi awal demo.</p><button class="btn dg" onclick="ask('Reset semua data demo ke kondisi awal?',()=>{DB=seed();save();toast('Data demo direset');render()})">Reset Data Demo</button></div></div>`]
 };
 const AFTER={
 orders:()=>{[['fq','q'],['fs','st'],['ff','from'],['ft','to']].forEach(([i,k])=>$('#'+i).oninput=e=>{F[k]=e.target.value;drawO()});drawO()},
@@ -129,10 +136,11 @@ const nav=p=>location.hash='#app/'+p;
 function logout(){localStorage.removeItem('wm_auth');location.hash='#login'}
 function notif(){const r=DB.ord.filter(o=>o.status=='Selesai').length,u=DB.ord.filter(o=>!o.paid).length;return`<div><b>${r}</b> order selesai, siap diambil</div><div><b>${u}</b> order belum lunas</div><div class="mu">${DB.cfg.name}</div>`}
 function render(){const[t,fn]=PG[PAGE];
-  $('#sb').innerHTML=`<a class="brand" href="#"><img src="logo_washy_moshy.png" alt="Washy Moshy" class="sidebar-logo"><span>Washy Moshy</span></a>`+MENU.map(([k,i])=>`<button class="mi ${k==PAGE?'on':''}" onclick="nav('${k}')">${ic(i)}${PG[k][0]}</button>`).join('')+`<button class="mi out" onclick="logout()">${ic('out')}Logout</button>`;
-  $('#pg').innerHTML=fn();$('#tt').textContent=t;$('#bc').textContent='Washy Moshy / '+t;$('#nt').innerHTML=notif();
+  $('#sb').innerHTML=`<a class="brand" href="#"><img src="logo_washy_moshy.png" alt="Washy Moshy" class="sidebar-logo"><span>Washy Moshy</span></a>`+MENU.filter(([k])=>can(k)).map(([k,i])=>`<button class="mi ${k==PAGE?'on':''}" onclick="nav('${k}')">${ic(i)}${PG[k][0]}</button>`).join('')+`<button class="mi out" onclick="logout()">${ic('out')}Logout</button>`;
+  $('.me').innerHTML=`<span class="av">${ME().ini}</span><div><b>${ME().name}</b><small>${ME().role}</small></div>`;$('#pg').innerHTML=fn();$('#tt').textContent=t;$('#bc').textContent='Washy Moshy / '+t;$('#nt').innerHTML=notif();
   document.body.classList.remove('open');if(AFTER[PAGE])AFTER[PAGE]()}
-function route(){let h=location.hash.slice(1);if(h.startsWith('app')&&!localStorage.wm_auth)h='login';
+function route(){let h=location.hash.slice(1);if(h.startsWith('app')&&!ME()){localStorage.removeItem('wm_auth');h='login'}
+  if(h.startsWith('app/')&&!can(h.split('/')[1])){toast('Akses ditolak: menu ini tidak tersedia untuk peran Anda','err');h='app/dashboard';history.replaceState(null,'','#app/dashboard')}
   const app=h.startsWith('app');$('#landing').hidden=!(!h||h=='fitur'||h=='alur');$('#login').hidden=h!='login';$('#app').hidden=!app;
   if(app){PAGE=h.split('/')[1];if(!PG[PAGE])PAGE='dashboard';render()}else window.scrollTo(0,0);closeM()}
 addEventListener('hashchange',route);
@@ -146,5 +154,6 @@ $('#lform').onsubmit=e=>{e.preventDefault();const u=$('#lu').value.trim(),p=$('#
   if(!u||!p){er.textContent='Username/email dan password wajib diisi.';return}
   b.classList.add('load');b.textContent='Memproses...';
   setTimeout(()=>{b.classList.remove('load');b.textContent='Masuk';
-    if((u=='admin'||u=='admin@washymoshy.id')&&p=='admin123'){localStorage.wm_auth=1;toast('Berhasil masuk');location.hash='#app/dashboard'}else er.textContent='Username atau password salah.'},700)};
+    const k=Object.keys(ACC).find(x=>ACC[x].p==p&&ACC[x].u.includes(u.toLowerCase()));
+    if(k){localStorage.wm_auth=k;toast('Berhasil masuk sebagai '+ACC[k].role);location.hash='#app/dashboard'}else er.textContent='Username atau password salah.'},700)};
 route();
