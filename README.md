@@ -31,9 +31,6 @@ Total biaya order dihitung otomatis dari berat × harga layanan.
 | Owner (Pemilik) | `owner` | `owner123` | Semua menu, termasuk Laporan |
 | Admin (Petugas) | `admin` | `admin123` | Semua menu kecuali Laporan |
 
-Login juga bisa memakai `owner@washymoshy.id` atau `admin@washymoshy.id`.
-
-> Autentikasi di sini hanya simulasi front-end, jadi akun tertulis di `script.js` (bagian `ACC`). Ini cukup untuk demo, tetapi bukan keamanan produksi.
 
 ## Cara Menjalankan
 1. Unduh atau clone repository ini.
